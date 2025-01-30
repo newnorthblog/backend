@@ -1,0 +1,125 @@
+basePath: /api/v1
+definitions:
+  ErrorStruct:
+    properties:
+      error_code:
+        type: integer
+      error_message:
+        type: string
+    type: object
+  v1.userLoginRequest:
+    properties:
+      email:
+        type: string
+      password:
+        minLength: 6
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  v1.userLoginResponse:
+    properties:
+      access_token:
+        type: string
+    type: object
+  v1.userRegisterRequest:
+    properties:
+      email:
+        maxLength: 255
+        type: string
+      password:
+        minLength: 6
+        type: string
+      username:
+        maxLength: 32
+        minLength: 3
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+info:
+  contact: {}
+  description: Backend API for New-North Blog
+  title: New-North Backend API
+  version: "1.0"
+paths:
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: Авторизация
+      parameters:
+      - description: Авторизация
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/v1.userLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.userLoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorStruct'
+      summary: Авторизация
+      tags:
+      - Client
+  /users/ping:
+    post:
+      consumes:
+      - application/json
+      description: Проверка доступности сервера
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: pong
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorStruct'
+      security:
+      - Bearer: []
+      summary: Ping
+      tags:
+      - Client
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Регистрация
+      parameters:
+      - description: Регистрация
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/v1.userRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/ErrorStruct'
+      summary: Регистрация
+      tags:
+      - Client
+securityDefinitions:
+  Bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
