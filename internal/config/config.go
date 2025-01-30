@@ -18,7 +18,7 @@ type Config struct {
 }
 
 type HTTPServer struct {
-	Port           string        `env:"HTTP_SERVER_PORT" env-default:"8080" comment:"Порт для HTTP сервера"`
+	Port           string        `env:"PORT" env-default:"8080" comment:"Порт для HTTP сервера"`
 	Timeout        time.Duration `env:"HTTP_SERVER_TIMEOUT" env-default:"4s" comment:"Таймаут для HTTP сервера"`
 	IdleTimeout    time.Duration `env:"HTTP_SERVER_IDLE_TIMEOUT" env-default:"60s" comment:"Таймаут бездействия для HTTP сервера"`
 	SwaggerEnabled bool          `env:"HTTP_SERVER_SWAGGER_ENABLED" comment:"Включить Swagger"`
