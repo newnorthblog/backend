@@ -27,7 +27,7 @@ compose-down:
 	docker compose -f docker-compose.yaml down 
 
 # build binary
-build: deps build_binary
+build: deps build-binary
 
 build-binary:
 	@echo 'build backend binary'
