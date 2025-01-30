@@ -31,7 +31,7 @@ build: deps build-binary
 
 build-binary:
 	@echo 'build backend binary'
-	go build -tags netgo -ldflags '-s -w' -o $(LOCAL_BIN) $(BUILD_DIR)
+	go build -tags netgo -ldflags '-s -w' -o $(LOCAL_BIN)/app $(BUILD_DIR)
 
 deps:
 	@echo 'install dependencies'
